@@ -50,6 +50,7 @@ descriptors_float = descriptors.astype(float)
 
 k = 200
 voc, variance = kmeans(descriptors_float, k, 1)
+im_features = np.zeros((len(img_paths), k), "float32")
 for i in range(len(img_paths)):
     words, distance = vq(des_list[i][1],voc)
     for w in words:
@@ -75,7 +76,7 @@ clf.fit(im_features, np.array(img_classes))
 #Train Random forest to compare how it does against SVM
 #from sklearn.ensemble import RandomForestClassifier
 #clf = RandomForestClassifier(n_estimators = 100, random_state=30)
-#clf.fit(im_features, np.array(image_classes))
+#clf.fit(im_features, np.array(img_classes))
 
 
 # Save the SVM
